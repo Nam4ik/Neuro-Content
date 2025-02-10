@@ -1,14 +1,17 @@
 
 
 <p align = center>
-<img src=readme/imgs/DeepSeek-Logo.png ,width=300 ,height=800>
+<img src=readme/imgs/DeepSeek-Logo.png ,width=300, height=200>
+  <br>
 <img src=readme/imgs/ChatGPT-Logo.png ,width=250, height=140>
 <img src=readme/imgs/Qwen-Logo.png ,width=135, height=140> 
 </p>
+<br>
 
 [![Telegram Channel](https://img.shields.io/badge/Telegram-Channel-blue?style=for-the-badge&logo=telegram)](https://t.me/ArcaneDevStudio)
 [![Contact Me](https://img.shields.io/badge/Contact-Me-green?style=for-the-badge&logo=telegram)](https://t.me/Nam4iks)
-<br>
+
+
 >[!WARNING]
 >The app not released and can work unstable!
 >Please report to me if you see an error
