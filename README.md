@@ -1,9 +1,9 @@
 
 
 <p align = center>
-<img src=readme/imgs/DeepSeek-Logo.png>
-<img src=readme/imgs/ChatGPT-Logo.png>
-<img src=readme/imgs/Qwen-Logo.png> 
+<img src=readme/imgs/DeepSeek-Logo.png ,width=300 ,height=800>
+<img src=readme/imgs/ChatGPT-Logo.png ,width=250, height=140>
+<img src=readme/imgs/Qwen-Logo.png ,width=135, height=140> 
 </p>
 
 [![Telegram Channel](https://img.shields.io/badge/Telegram-Channel-blue?style=for-the-badge&logo=telegram)](https://t.me/ArcaneDevStudio)
