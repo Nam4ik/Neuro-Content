@@ -1,4 +1,4 @@
-.so
-.o
-.dll
+*.so
+*.o
+*.dll
 bin/*
