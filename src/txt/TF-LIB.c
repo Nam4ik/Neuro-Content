@@ -20,6 +20,7 @@
 #define MAX_DOCUMENTS 1000
 #define MAX_WORDS 5000
 #define MAX_LINE_LENGTH 1024
+
 /*
 extern "C" {
   void calculate_tf(Document *doc, const char *text);
