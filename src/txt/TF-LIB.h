@@ -8,13 +8,14 @@
                                                               
 
 */
-
 #ifndef TF_LIB_H
 #define TF_LIB_H 
 
 #include <stdio.h>
 
 #define MAX_WORDS 5000
+#define MAX_DOCUMENTS 1000
+#define MAX_LINE_LENGTH 1024
 
 typedef struct {
   char word[50];
@@ -30,6 +31,7 @@ void calculate_tf(Document *doc, const char *text);
 void calculate_idf();
 void calculate_tfidf();
 
+#endif
 /*
   `calculate_idf()` and `calculate_tfidf()` have not args, now to compute 
   TF-IDF you need use ALL this funcs in order
@@ -39,5 +41,3 @@ void calculate_tfidf();
 
 */
 
-
-#endif
