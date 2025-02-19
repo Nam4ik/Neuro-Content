@@ -17,8 +17,7 @@ extern "C" {
   void calculate_tfidf();
 
 }
-*/
-/*
+
 typedef struct {
     char word[50];
     int freq;
