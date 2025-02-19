@@ -54,8 +54,9 @@
 ```
 или же более простая формула 
 <p align = center>
-<img src=readme/imgs/TFIDF.jpg, width=500, height=150>
+<img src=readme/imgs/TFIDF.png, width=500, height=150>
 </p>
+
 # Как отличить нейро-медиа от настоящего?
 ## Математический взгляд
 
