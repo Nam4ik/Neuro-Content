@@ -53,9 +53,9 @@
 \text{TF-IDF}(t, d, D) = \left( \frac{f_{t, d}}{\sum_{t' \in d} f_{t', d}} \right) \times \log \left( \frac{N}{|\{d \in D : t \in d\}|} \right)
 ```
 или же более простая формула 
-
-<img src = readme/imgs/TFIDF.jpg>
-
+<p align = center>
+<img src=readme/imgs/TFIDF.jpg, width=500, height=150>
+</p>
 # Как отличить нейро-медиа от настоящего?
 ## Математический взгляд
 
