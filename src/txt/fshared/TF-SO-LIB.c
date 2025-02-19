@@ -50,7 +50,7 @@ typedef struct {
 IDFEntry idf_table[MAX_WORDS];
 int idf_table_size = 0;
 
-__declspec(dllexport) void calculate_tf(Document *doc, const char *text) {
+void calculate_tf(Document *doc, const char *text) {
     doc->word_count = 0;
 
     char word[50];
@@ -82,20 +82,10 @@ __declspec(dllexport) void calculate_tf(Document *doc, const char *text) {
     }
 }
 
-
-__declspec(dllexport) int hash_function(const char *word) {
-    unsigned long hash = 5381;
-    int c;
-    while ((c = *word++)) {
-        hash = ((hash << 5) + hash) + c; /* hash * 33 + c */
+void calculate_idf() {
+    for (int i = 0; i < idf_table_size; i++) {
+        idf_table[i].doc_count = 0;
     }
-    return hash % MAX_WORDS;
-}
-
-
-__declspec(dllexport) void calculate_idf() {
-    memset(idf_table, 0, sizeof(idf_table));
-
 
     for (int i = 0; i < document_count; i++) {
         for (int j = 0; j < documents[i].word_count; j++) {
@@ -122,9 +112,9 @@ __declspec(dllexport) void calculate_idf() {
     }
 }
 
+void calculate_tfidf() {
+    calculate_idf();
 
-
-__declspec(dllexport) void calculate_tfidf() {
     for (int i = 0; i < document_count; i++) {
         int total_words = 0;
 
@@ -150,31 +140,30 @@ __declspec(dllexport) void calculate_tfidf() {
         }
     }
 }
-/*
-// main.c
-int main() {
-    char input_text[MAX_LINE_LENGTH];
 
-    printf("Введите текст документа: ");
-    if (fgets(input_text, MAX_LINE_LENGTH, stdin) == NULL) {
-        printf("Ошибка при чтении ввода.\n");
-        return 1;
-    }
-
-    input_text[strcspn(input_text, "\n")] = '\0';
-
-    if (document_count >= MAX_DOCUMENTS) {
-        printf("Достигнут максимум документов (%d).\n", MAX_DOCUMENTS);
-        return 1;
-    }
-
-    Document *current_doc = &documents[document_count];
-    calculate_tf(current_doc, input_text);
-    document_count++;
-
-    calculate_idf();
-    calculate_tfidf();
-
-    return 0;
-}
-*/
+// // main.c
+// int main() {
+//     char input_text[MAX_LINE_LENGTH];
+//
+//     printf("Введите текст документа: ");
+//     if (fgets(input_text, MAX_LINE_LENGTH, stdin) == NULL) {
+//         printf("Ошибка при чтении ввода.\n");
+//         return 1;
+//     }
+//
+//     input_text[strcspn(input_text, "\n")] = '\0';
+//
+//     if (document_count >= MAX_DOCUMENTS) {
+//         printf("Достигнут максимум документов (%d).\n", MAX_DOCUMENTS);
+//         return 1;
+//     }
+//
+//     Document *current_doc = &documents[document_count];
+//     calculate_tf(current_doc, input_text);
+//     document_count++;
+//
+//     calculate_idf();
+//     calculate_tfidf();
+//
+//     return 0;
+// }

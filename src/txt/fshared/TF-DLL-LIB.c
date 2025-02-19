@@ -50,7 +50,7 @@ typedef struct {
 IDFEntry idf_table[MAX_WORDS];
 int idf_table_size = 0;
 
-void calculate_tf(Document *doc, const char *text) {
+__declspec(dllexport) void calculate_tf(Document *doc, const char *text) {
     doc->word_count = 0;
 
     char word[50];
@@ -82,7 +82,7 @@ void calculate_tf(Document *doc, const char *text) {
     }
 }
 
-void calculate_idf() {
+__declspec(dllexport) void calculate_idf() {
     for (int i = 0; i < idf_table_size; i++) {
         idf_table[i].doc_count = 0;
     }
@@ -109,10 +109,10 @@ void calculate_idf() {
         if (idf_table[i].doc_count > 0) {
             idf_table[i].doc_count = log(document_count / (double)idf_table[i].doc_count);
         }
-    }
+}
 }
 
-void calculate_tfidf() {
+__declspec(dllexport) void calculate_tfidf() {
     calculate_idf();
 
     for (int i = 0; i < document_count; i++) {
@@ -140,7 +140,7 @@ void calculate_tfidf() {
         }
     }
 }
-
+/*
 // main.c
 int main() {
     char input_text[MAX_LINE_LENGTH];
@@ -167,3 +167,6 @@ int main() {
 
     return 0;
 }
+
+Optionally, if you will not compile to .so uncomment this
+*/
