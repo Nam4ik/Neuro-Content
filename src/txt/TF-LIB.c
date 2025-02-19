@@ -9,18 +9,6 @@
 
 */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <math.h>
-#include <ctype.h>
-
-#include "TF-LIB.h"
-
-#define MAX_DOCUMENTS 1000
-#define MAX_WORDS 5000
-#define MAX_LINE_LENGTH 1024
-
 /*
 extern "C" {
   void calculate_tf(Document *doc, const char *text);
@@ -42,12 +30,25 @@ typedef struct {
 } Document;
 */
 
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <math.h>
+#include <ctype.h>
+#include "TF-LIB.h"
+
 Document documents[MAX_DOCUMENTS];
 int document_count = 0;
 
-// Хэш-таблица для подсчёта IDF
+typedef struct {
+    char word[50];
+    int doc_count;
+} IDFEntry;
+
+IDFEntry idf_table[MAX_WORDS];
 int idf_table_size = 0;
-int idf_table[MAX_WORDS] = {0};
 
 void calculate_tf(Document *doc, const char *text) {
     doc->word_count = 0;
@@ -55,14 +56,12 @@ void calculate_tf(Document *doc, const char *text) {
     char word[50];
     int i = 0, j = 0;
 
-
     while (text[i]) {
         if (isalpha(text[i])) {
             word[j++] = tolower(text[i]);
         } else if (j > 0) {
             word[j] = '\0';
             j = 0;
-
 
             int found = 0;
             for (int k = 0; k < doc->word_count; k++) {
@@ -72,7 +71,6 @@ void calculate_tf(Document *doc, const char *text) {
                     break;
                 }
             }
-
 
             if (!found && doc->word_count < MAX_WORDS) {
                 strcpy(doc->words[doc->word_count].word, word);
@@ -84,41 +82,41 @@ void calculate_tf(Document *doc, const char *text) {
     }
 }
 
-
-int hash_function(const char *word) {
-    unsigned long hash = 5381;
-    int c;
-    while ((c = *word++)) {
-        hash = ((hash << 5) + hash) + c; /* hash * 33 + c */
-    }
-    return hash % MAX_WORDS;
-}
-
-
 void calculate_idf() {
-    memset(idf_table, 0, sizeof(idf_table));
-
+    for (int i = 0; i < idf_table_size; i++) {
+        idf_table[i].doc_count = 0;
+    }
 
     for (int i = 0; i < document_count; i++) {
         for (int j = 0; j < documents[i].word_count; j++) {
-            int hash = hash_function(documents[i].words[j].word);
-            idf_table[hash]++;
+            int found = 0;
+            for (int k = 0; k < idf_table_size; k++) {
+                if (strcmp(idf_table[k].word, documents[i].words[j].word) == 0) {
+                    idf_table[k].doc_count++;
+                    found = 1;
+                    break;
+                }
+            }
+            if (!found && idf_table_size < MAX_WORDS) {
+                strcpy(idf_table[idf_table_size].word, documents[i].words[j].word);
+                idf_table[idf_table_size].doc_count = 1;
+                idf_table_size++;
+            }
         }
     }
 
-    for (int i = 0; i < MAX_WORDS; i++) {
-        if (idf_table[i] > 0) {
-            idf_table[i] = log(document_count / (double)idf_table[i]);
+    for (int i = 0; i < idf_table_size; i++) {
+        if (idf_table[i].doc_count > 0) {
+            idf_table[i].doc_count = log(document_count / (double)idf_table[i].doc_count);
         }
     }
 }
 
-
-
 void calculate_tfidf() {
+    calculate_idf();
+
     for (int i = 0; i < document_count; i++) {
         int total_words = 0;
-
 
         for (int j = 0; j < documents[i].word_count; j++) {
             total_words += documents[i].words[j].freq;
@@ -127,38 +125,43 @@ void calculate_tfidf() {
         //TF-IDF
         for (int j = 0; j < documents[i].word_count; j++) {
             double tf = (double)documents[i].words[j].freq / total_words;
-            int hash = hash_function(documents[i].words[j].word);
-            double idf = idf_table[hash];
+            double idf = 0.0;
+
+            for (int k = 0; k < idf_table_size; k++) {
+                if (strcmp(idf_table[k].word, documents[i].words[j].word) == 0) {
+                    idf = idf_table[k].doc_count;
+                    break;
+                }
+            }
+
             double tfidf = tf * idf;
 
             printf("Doc %d, Word: %s, TF-IDF: %.4f\n", i, documents[i].words[j].word, tfidf);
         }
     }
 }
-
 /*
+// main.c
 int main() {
     char input_text[MAX_LINE_LENGTH];
 
-    // Считывание текста от пользователя
     printf("Введите текст документа: ");
     if (fgets(input_text, MAX_LINE_LENGTH, stdin) == NULL) {
         printf("Ошибка при чтении ввода.\n");
         return 1;
     }
 
-    // Проверка на превышение лимита документов
+    input_text[strcspn(input_text, "\n")] = '\0';
+
     if (document_count >= MAX_DOCUMENTS) {
         printf("Достигнут максимум документов (%d).\n", MAX_DOCUMENTS);
         return 1;
     }
 
-    // Добавление документа и расчёт TF
     Document *current_doc = &documents[document_count];
     calculate_tf(current_doc, input_text);
     document_count++;
 
-    // Расчёт IDF и TF-IDF
     calculate_idf();
     calculate_tfidf();
 
