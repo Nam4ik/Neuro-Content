@@ -22,6 +22,7 @@
 | _empty_ |  [Web](deploy) | _not created yet_|
 
 <br>
+
 >[!WARNING]
 >The app not released and can work unstable!
 >Please report to me if you see an error
