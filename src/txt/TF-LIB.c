@@ -140,7 +140,7 @@ void calculate_tfidf() {
         }
     }
 }
-
+/*
 // main.c
 int main() {
     char input_text[MAX_LINE_LENGTH];
@@ -167,9 +167,8 @@ int main() {
 
     return 0;
 }
-<<<<<<< HEAD
+
 
 Optionally, if you will not compile to .so uncomment this 
 */
-=======
->>>>>>> da67217 (Main commit)
+
