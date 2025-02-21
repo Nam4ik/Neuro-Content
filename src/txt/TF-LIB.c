@@ -144,6 +144,7 @@ void calculate_tfidf() {
 // main.c
 int main() {
     char input_text[MAX_LINE_LENGTH];
+//    chat input_text1[MAX_LINE_LENGTH];
 
     printf("Введите текст документа: ");
     if (fgets(input_text, MAX_LINE_LENGTH, stdin) == NULL) {
@@ -151,6 +152,10 @@ int main() {
         return 1;
     }
 
+    printf("Введите текст второго документа: ");
+    if (fgets(input_text, MAX_LINE_LENGTH, stdin) == NULL) {
+        printf("Ошибка при вводе текста")
+    }
     input_text[strcspn(input_text, "\n")] = '\0';
 
     if (document_count >= MAX_DOCUMENTS) {
