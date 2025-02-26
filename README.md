@@ -133,6 +133,13 @@
 
 # Проект, архитектуры и тп
 <a id="proj"></a>
+Все вариации предоставления 
+- Python библиотека
+- Заголовочный файл `C` и `C++`
+- Графика (все функции)
+- Web-сайт (github pages)
+- CLI версия
+- Остальные API
 
 # Архитектура 
 <a id="arch"></a>
@@ -166,8 +173,9 @@
 ```CLIBS
 PortAudio: v19.7.0
 POSIX Libraries
-MATH_H
-CTYPES_H
+Math
+LibEXIF
+cJSON
 ```
 
 
@@ -175,4 +183,4 @@ CTYPES_H
 <a id="deploy"></a>
 
 
-## [**Назад**](#start)
+**[**Назад**](#start)** 
