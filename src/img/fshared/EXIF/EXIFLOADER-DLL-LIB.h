@@ -11,5 +11,7 @@
 
 #endif
 
+#define EXIFLOADER_EXPORTS
+
 extern "C" EXIFLOADER_API char* get_exif_json(const char* filename);
 
