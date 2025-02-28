@@ -1,9 +1,17 @@
 #pragma-once 
 
-#ifndef EXIFLOADER_EXPORTS
-#define EXIFLOADER_EXPORTS 
-#endif /* ifndef EXIFLOADER_EXPORTS */
+#ifndef EXIF_PARSER_H
+#define EXIF_PARSER_H
 
+#include <cjson/cJSON.h>
 
-void process_images_in_directory(const char* directory, const char* output_file);
-char* get_iptc_json(const char* filename);
+#ifdef __cplusplus
+extern "C" {
+#endif
+char* process_files(const char** filenames, int count);
+void free_json_result(char* json);
+#ifdef __cplusplus
+}
+#endif
+
+#endif // EXIF_PARSER_H
