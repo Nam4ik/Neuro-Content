@@ -1,0 +1,8 @@
+# ninja log v6
+1	25	1739990657488030600	/home/namilskyy/Neuro-Content/NeuroUI/build/Desktop-Debug/CMakeFiles/cmake.verify_globs	8294dd287e9f4442
+25	304	1739990657788031950	NeuroUI_autogen/timestamp	75debcd2cb9f4a38
+25	304	1739990657788031950	NeuroUI_autogen/mocs_compilation.cpp	75debcd2cb9f4a38
+25	304	1739990657788031950	/home/namilskyy/Neuro-Content/NeuroUI/build/Desktop-Debug/NeuroUI_autogen/timestamp	75debcd2cb9f4a38
+25	304	1739990657788031950	/home/namilskyy/Neuro-Content/NeuroUI/build/Desktop-Debug/NeuroUI_autogen/mocs_compilation.cpp	75debcd2cb9f4a38
+304	1681	1739990657791365299	CMakeFiles/NeuroUI.dir/NeuroUI_autogen/mocs_compilation.cpp.o	9b309c1445275dba
+304	1755	1739990657791365299	CMakeFiles/NeuroUI.dir/main.cpp.o	f7dbd34faa650722
