@@ -175,6 +175,8 @@ PortAudio: v19.7.0
 POSIX Libraries
 Math
 LibEXIF
+LibIPTC
+LibPNG
 cJSON
 ```
 
